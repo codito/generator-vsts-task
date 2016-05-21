@@ -8,7 +8,7 @@ var helpers = require('yeoman-test');
 var uuid = require('node-uuid');
 
 describe('generator-vsts-task:task', function () {
-  before(function (done) {
+  before(function () {
     this.answers = {
       name: 'testtask',
       friendlyName: 'test task',
@@ -17,15 +17,13 @@ describe('generator-vsts-task:task', function () {
       visibility: ['Build', 'Release'],
       author: 'testuser'
     };
-
-    done();
   });
 
   context('run on new directory', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/task'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/task'))
         .withPrompts(this.answers)
-        .on('end', done);
+        .toPromise();
     });
 
     it('creates a task.json', function () {
@@ -82,12 +80,12 @@ describe('generator-vsts-task:task', function () {
   });
 
   context('with node template', function () {
-    before(function (done) {
+    before(function () {
       this.answers.template = 'node';
 
-      helpers.run(path.join(__dirname, '../generators/task'))
+      return helpers.run(path.join(__dirname, '../generators/task'))
         .withPrompts(this.answers)
-        .on('end', done);
+        .toPromise();
     });
 
     it('creates template task', function () {
@@ -120,12 +118,12 @@ describe('generator-vsts-task:task', function () {
   });
 
   context('with powershell template', function () {
-    before(function (done) {
+    before(function () {
       this.answers.template = 'powershell';
 
-      helpers.run(path.join(__dirname, '../generators/task'))
+      return helpers.run(path.join(__dirname, '../generators/task'))
         .withPrompts(this.answers)
-        .on('end', done);
+        .toPromise();
     });
 
     it('creates template task', function () {

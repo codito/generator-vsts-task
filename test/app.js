@@ -15,10 +15,10 @@ describe('generator-vsts-task:app', function () {
   });
 
   context('run on new directory', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/app'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts(this.answers)
-        .on('end', done);
+        .toPromise();
     });
 
     it('creates a node based gitignore', function () {
@@ -86,10 +86,10 @@ describe('generator-vsts-task:app', function () {
   });
 
   context('run on existing directory', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/app'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts(this.answers)
-        .on('end', done);
+        .toPromise();
     });
 
     it('creates files', function () {
