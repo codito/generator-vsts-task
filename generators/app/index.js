@@ -21,7 +21,6 @@ module.exports = generators.Base.extend({
 
   prompting: {
     getExtensionType: function () {
-      var done = this.async();
       var questions = [
         {
           type: 'input',
@@ -73,7 +72,6 @@ module.exports = generators.Base.extend({
         this.props.publisher = answers.publisher;
         this.props.tags = answers.tags;
         this.props.uri = answers.uri;
-        done();
       }.bind(this));
     }
   },
