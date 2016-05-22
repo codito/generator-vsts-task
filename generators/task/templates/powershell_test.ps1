@@ -1,5 +1,5 @@
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-. "$here\..\<%- name %>\task.ps1"
+. "$here\..\..\src\<%- name %>\task.ps1"
 
 Describe "Write-Hello" {
 

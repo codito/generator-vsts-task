@@ -1,7 +1,7 @@
 [CmdletBinding(DefaultParameterSetName = 'None')]
 param
 (
-   [String] [Parameter(Mandatory = $true)]
+   [String]
    $Name
 )
 
