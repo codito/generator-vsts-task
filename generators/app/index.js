@@ -6,6 +6,7 @@ var _ = require('lodash');
 const username = require('username');
 var generators = require('yeoman-generator');
 var yosay = require('yosay');
+var chalk = require('chalk');
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -19,64 +20,59 @@ module.exports = generators.Base.extend({
     this.props.version = '0.1.0';
   },
 
-  prompting: {
-    getExtensionType: function () {
-      var questions = [
-        {
-          type: 'input',
-          name: 'name',
-          message: 'What would you call this extension?',
-          default: path.basename(process.cwd()),
-          validate: function (str) {
-            return str.length > 0;
-          }
-        },
-        {
-          type: 'input',
-          name: 'publisher',
-          message: 'Your visualstudio publisher name',
-          default: username.sync()
-        },
-        {
-          type: 'input',
-          name: 'description',
-          message: 'How would you describe this extension?',
-          default: 'My super awesome extension!'
-        },
-        {
-          type: 'input',
-          name: 'tags',
-          message: 'Provide a few tags to describe this extension (comma separated)',
-          filter: function (tags) {
-            return tags.split(/\s*,\s*/g);
-          }
-        },
-        {
-          type: 'input',
-          name: 'uri',
-          message: 'Provide your website'
-        },
-        {
-          type: 'confirm',
-          name: 'addTask',
-          message: 'Would you like to add a build/release task?',
-          default: true
-        }
-      ];
+  prompting: function () {
+    var done = this.async();
 
-      this.prompt(questions, function (answers) {
-        this.props.extensionType = answers.extensionType;
-        this.props.name = answers.name;
-        this.props.extensionId = _.kebabCase(answers.name);
-        this.props.description = answers.description;
-        this.props.publisher = answers.publisher;
-        this.props.tags = answers.tags;
-        this.props.uri = answers.uri;
-      }.bind(this));
-    }
+    var questions = [
+    {
+      type: 'input',
+      name: 'name',
+      message: 'What would you call this extension?',
+      default: path.basename(process.cwd()),
+               validate: function (str) {
+                 return str.length > 0;
+               }
+    },
+    {
+      type: 'input',
+      name: 'publisher',
+      message: 'Your visualstudio publisher name',
+      default: username.sync()
+    },
+    {
+      type: 'input',
+      name: 'description',
+      message: 'How would you describe this extension?',
+      default: 'My super awesome extension!'
+    },
+    {
+      type: 'input',
+      name: 'tags',
+      message: 'Tags for the extension (comma separated)',
+      filter: function (tags) {
+        return tags.split(/\s*,\s*/g);
+      }
+    },
+    {
+      type: 'input',
+      name: 'uri',
+      message: 'Extension website'
+    }];
+
+    this.prompt(questions, function (answers) {
+      this.props.extensionType = answers.extensionType;
+      this.props.name = answers.name;
+      this.props.extensionId = _.kebabCase(answers.name);
+      this.props.description = answers.description;
+      this.props.publisher = answers.publisher;
+      this.props.tags = answers.tags;
+      this.props.uri = answers.uri;
+      done();
+    }.bind(this));
   },
 
   default: function () {
+    this.log('\nLet\'s add a task to ' + chalk.magenta(this.props.name) + ' extension...');
     this.composeWith('vsts-task:task', {}, {
       local: require.resolve('../task')
     });
