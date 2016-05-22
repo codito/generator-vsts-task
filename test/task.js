@@ -132,7 +132,7 @@ describe('generator-vsts-task:task', function () {
 
     it('creates template test for task', function () {
       assert.file('test/testtask/task.tests.ps1');
-      assert.fileContent('test/testtask/task.tests.ps1', '. "$here\\..\\testtask\\task.ps1"');
+      assert.fileContent('test/testtask/task.tests.ps1', '. "$here\\..\\..\\src\\testtask\\task.ps1"');
     });
 
     it('adds execution info to task.json', function () {

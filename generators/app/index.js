@@ -24,40 +24,40 @@ module.exports = generators.Base.extend({
     var done = this.async();
 
     var questions = [
-    {
-      type: 'input',
-      name: 'name',
-      message: 'What would you call this extension?',
-      default: path.basename(process.cwd()),
-               validate: function (str) {
-                 return str.length > 0;
-               }
-    },
-    {
-      type: 'input',
-      name: 'publisher',
-      message: 'Your visualstudio publisher name',
-      default: username.sync()
-    },
-    {
-      type: 'input',
-      name: 'description',
-      message: 'How would you describe this extension?',
-      default: 'My super awesome extension!'
-    },
-    {
-      type: 'input',
-      name: 'tags',
-      message: 'Tags for the extension (comma separated)',
-      filter: function (tags) {
-        return tags.split(/\s*,\s*/g);
-      }
-    },
-    {
-      type: 'input',
-      name: 'uri',
-      message: 'Extension website'
-    }];
+      {
+        type: 'input',
+        name: 'name',
+        message: 'What would you call this extension?',
+        default: path.basename(process.cwd()),
+        validate: function (str) {
+          return str.length > 0;
+        }
+      },
+      {
+        type: 'input',
+        name: 'publisher',
+        message: 'Your visualstudio publisher name',
+        default: username.sync()
+      },
+      {
+        type: 'input',
+        name: 'description',
+        message: 'How would you describe this extension?',
+        default: 'My super awesome extension!'
+      },
+      {
+        type: 'input',
+        name: 'tags',
+        message: 'Tags for the extension (comma separated)',
+        filter: function (tags) {
+          return tags.split(/\s*,\s*/g);
+        }
+      },
+      {
+        type: 'input',
+        name: 'uri',
+        message: 'Extension website'
+      }];
 
     this.prompt(questions, function (answers) {
       this.props.extensionType = answers.extensionType;
