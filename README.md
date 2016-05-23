@@ -16,6 +16,9 @@
 
     $ yo vsts-task
 
+#### Screencast
+[![asciicast](https://asciinema.org/a/46401.png)](https://asciinema.org/a/46401)
+
 # Contribute
 Pull requests or bug reports are most welcome!
 

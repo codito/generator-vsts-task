@@ -37,13 +37,13 @@ describe('generator-vsts-task:task', function () {
         author: 'testuser',
         version: {Major: 0, Minor: 1, Patch: 0},
         demands: [],
-        inputs: [{name: 'name', type: 'string', label: 'A name', defaultValue: 'World', required: 'true', helpMarkDown: 'If you\'re Arya Stark, you\'d enter `No one`.'}],
+        inputs: [{name: 'name', type: 'string', label: 'A name', defaultValue: 'World', required: 'true', helpMarkDown: 'A name. Enter `no one` if you\'re Arya Stark.'}],
         instanceNameFormat: 'Hello $(name)'
       });
 
       var content = JSON.parse(fs.readFileSync('src/testtask/task.json'));
       assert(uuid.parse(content.id) !== null);
-      assert(_.startsWith(content.helpMarkdown, '# TODO'));
+      assert(_.startsWith(content.helpMarkdown, '### TODO'));
     });
 
     it('adds contribution to extension manifest', function () {

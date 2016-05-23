@@ -103,7 +103,7 @@ module.exports = generators.Base.extend({
       manifest.name = this.props.name;
       manifest.friendlyName = this.props.friendlyName;
       manifest.description = this.props.description;
-      manifest.helpMarkdown = '# TODO Write help content';
+      manifest.helpMarkdown = '### TODO Write help content';
       manifest.category = this.props.category;
       manifest.visibility = this.props.visibility;
       manifest.author = this.props.author;
@@ -119,7 +119,7 @@ module.exports = generators.Base.extend({
             label: 'A name',
             defaultValue: 'World',
             required: 'true',
-            helpMarkDown: 'If you\'re Arya Stark, you\'d enter `No one`.'
+            helpMarkDown: 'A name. Enter `no one` if you\'re Arya Stark.'
           }
         ],
         instanceNameFormat: 'Hello $(name)'
